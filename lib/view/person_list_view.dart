@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pdax_exam/controller/person_list_controller.dart';
+import 'package:pdax_exam/view/person_view.dart';
 
 class PersonListView extends StatefulWidget {
   final PersonListController controller;
@@ -39,7 +40,8 @@ class _PersonListViewState extends State<PersonListView> {
       scrollDirection: Axis.vertical,
       itemCount: widget.controller.people.length,
       itemBuilder: (BuildContext ctxt, int index) {
-        return Text(widget.controller.people[index].name);
+        return PersonView(
+            person: widget.controller.people[index], index: index);
       },
     );
   }

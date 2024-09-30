@@ -1,7 +1,7 @@
 class Person {
   String name;
   String email;
-  String image;
+  String imgURL;
 
-  Person(this.name, this.email, this.image);
+  Person(this.name, this.email, this.imgURL);
 }
