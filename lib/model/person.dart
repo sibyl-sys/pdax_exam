@@ -52,4 +52,9 @@ class Address {
         countryCode = map["country_code"] as String,
         lat = map["latitude"] as double,
         long = map["longitude"] as double;
+
+  @override
+  String toString() {
+    return "$street $streetName $buildingNumber $city $zipcode $country $countryCode";
+  }
 }
