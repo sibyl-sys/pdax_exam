@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 
 class PersonListController extends ChangeNotifier {
   List<Person> people = [];
+  bool isLoading = false;
   int refreshCount = 0;
   int refreshLimit = 4;
 
@@ -15,10 +16,15 @@ class PersonListController extends ChangeNotifier {
     }
   }
 
+  void startLoading() {
+    if (refreshCount > refreshLimit) return;
+    isLoading = true;
+    notifyListeners();
+  }
+
   void fetchPeople(
     int qty,
   ) async {
-    print("Loading people");
     if (refreshCount > refreshLimit) return;
     var url = Uri.https(
         "fakerapi.it", "/api/v2/persons", {'quantity': qty.toString()});
@@ -37,6 +43,7 @@ class PersonListController extends ChangeNotifier {
     } else {
       throw Exception("Failed to load people");
     }
+    isLoading = false;
     refreshCount++;
     notifyListeners();
   }

@@ -17,7 +17,7 @@ class _PersonListViewState extends State<PersonListView> {
   void _scrollListener() {
     if (_scrollController.position.pixels ==
         _scrollController.position.maxScrollExtent) {
-      print("Refresh");
+      listController.startLoading();
       listController.fetchPeople(20);
     }
   }
@@ -42,9 +42,17 @@ class _PersonListViewState extends State<PersonListView> {
       shrinkWrap: true,
       controller: _scrollController,
       scrollDirection: Axis.vertical,
-      itemCount: listController.people.length,
+      itemCount: listController.people.length + 1,
       itemBuilder: (BuildContext ctxt, int index) {
-        return PersonCard(person: listController.people[index], index: index);
+        if (index < listController.people.length) {
+          return PersonCard(person: listController.people[index], index: index);
+        } else if (listController.isLoading) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (listController.refreshCount > listController.refreshLimit) {
+          return const Center(child: Text("No more data."));
+        } else {
+          return const SizedBox.shrink();
+        }
       },
     );
   }
