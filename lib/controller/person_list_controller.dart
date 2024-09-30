@@ -37,8 +37,7 @@ class PersonListController extends ChangeNotifier {
           jsonDecode(Utf8Decoder().convert(response.body.codeUnits));
       final List peopleData = json["data"];
       for (var person in peopleData) {
-        people.add(Person(person["firstname"] + " " + person["lastname"],
-            person["email"], person["image"]));
+        people.add(Person.fromMap(person));
       }
     } else {
       throw Exception("Failed to load people");

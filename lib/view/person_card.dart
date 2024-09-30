@@ -16,7 +16,7 @@ class PersonCard extends StatelessWidget {
       Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(person.name,
+          Text("${person.firstName} ${person.lastName}",
               style:
                   const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
           Text(person.email)
