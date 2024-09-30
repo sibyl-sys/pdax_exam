@@ -9,19 +9,24 @@ class PersonCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-        child: Row(children: [
-      Image.network("https://i.pravatar.cc/100?random=${index.toString()}",
-          width: 100, height: 100),
-      SizedBox(width: 10),
-      Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text("${person.firstName} ${person.lastName}",
-              style:
-                  const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-          Text(person.email)
-        ],
-      )
-    ]));
+        child: InkWell(
+      onTap: () {
+        Navigator.pushNamed(context, "/person", arguments: person);
+      },
+      child: Row(children: [
+        Image.network("https://i.pravatar.cc/100?random=${index.toString()}",
+            width: 100, height: 100),
+        SizedBox(width: 10),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text("${person.firstName} ${person.lastName}",
+                style:
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+            Text(person.email)
+          ],
+        )
+      ]),
+    ));
   }
 }
