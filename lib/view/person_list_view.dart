@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pdax_exam/controller/person_list_controller.dart';
-import 'package:pdax_exam/view/person_view.dart';
+import 'package:pdax_exam/view/person_card.dart';
 import 'package:provider/provider.dart';
 
 class PersonListView extends StatefulWidget {
@@ -42,7 +42,7 @@ class _PersonListViewState extends State<PersonListView> {
       scrollDirection: Axis.vertical,
       itemCount: listController.people.length,
       itemBuilder: (BuildContext ctxt, int index) {
-        return PersonView(person: listController.people[index], index: index);
+        return PersonCard(person: listController.people[index], index: index);
       },
     );
   }

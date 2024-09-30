@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:pdax_exam/model/person.dart';
 
-class PersonView extends StatelessWidget {
+class PersonCard extends StatelessWidget {
   final Person person;
   final int index;
-  const PersonView({super.key, required this.person, required this.index});
+  const PersonCard({super.key, required this.person, required this.index});
 
   @override
   Widget build(BuildContext context) {
