@@ -10,9 +10,17 @@ class PersonCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
         child: Row(children: [
-      Image.network("https://picsum.photos/100?random=${index.toString()}"),
+      Image.network("https://i.pravatar.cc/100?random=${index.toString()}",
+          width: 100, height: 100),
+      SizedBox(width: 10),
       Column(
-        children: [Text(person.name), Text(person.email)],
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(person.name,
+              style:
+                  const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+          Text(person.email)
+        ],
       )
     ]));
   }
