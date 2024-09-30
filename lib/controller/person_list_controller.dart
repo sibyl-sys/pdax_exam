@@ -1,12 +1,15 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:pdax_exam/model/person.dart';
 import 'package:http/http.dart' as http;
 
-class PersonListController {
+class PersonListController extends ChangeNotifier {
   List<Person> people = [];
 
-  void fetchPeople(int qty) async {
+  void fetchPeople(
+    int qty,
+  ) async {
     var url = Uri.https(
         "fakerapi.it", "/api/v2/persons", {'quantity': qty.toString()});
     final headers = {
@@ -18,12 +21,13 @@ class PersonListController {
       final Map<String, dynamic> json =
           jsonDecode(Utf8Decoder().convert(response.body.codeUnits));
       final List peopleData = json["data"];
-      peopleData.forEach((person) {
+      for (var person in peopleData) {
         people.add(Person(person["firstname"] + " " + person["lastname"],
             person["email"], person["image"]));
-      });
+      }
     } else {
       throw Exception("Failed to load people");
     }
+    notifyListeners();
   }
 }

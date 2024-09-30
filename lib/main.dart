@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:pdax_exam/controller/person_list_controller.dart';
 import 'package:pdax_exam/view/person_list_view.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(MainApp());
+  runApp(ChangeNotifierProvider(
+      create: (context) => PersonListController(), child: MainApp()));
 }
 
 class MainApp extends StatelessWidget {
-  final PersonListController controller = PersonListController();
-
   MainApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    controller.fetchPeople(10);
+    context.read<PersonListController>().fetchPeople(10);
     return SafeArea(
       child: MaterialApp(
         home: Scaffold(
@@ -23,7 +23,7 @@ class MainApp extends StatelessWidget {
                 "People",
                 style: TextStyle(color: Colors.white),
               )),
-          body: PersonListView(controller: controller),
+          body: PersonListView(),
         ),
       ),
     );
