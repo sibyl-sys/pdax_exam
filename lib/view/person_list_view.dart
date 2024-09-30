@@ -47,7 +47,8 @@ class _PersonListViewState extends State<PersonListView> {
         if (index < listController.people.length) {
           return PersonCard(person: listController.people[index], index: index);
         } else if (listController.isLoading) {
-          return const Center(child: CircularProgressIndicator());
+          return const Center(
+              child: CircularProgressIndicator(color: Colors.green));
         } else if (listController.refreshCount > listController.refreshLimit) {
           return const Center(child: Text("No more data."));
         } else {
