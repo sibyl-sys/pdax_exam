@@ -18,7 +18,10 @@ class PersonListController {
       final Map<String, dynamic> json =
           jsonDecode(Utf8Decoder().convert(response.body.codeUnits));
       final List peopleData = json["data"];
-      print(peopleData);
+      peopleData.forEach((person) {
+        people.add(Person(person["firstname"] + " " + person["lastname"],
+            person["email"], person["image"]));
+      });
     } else {
       throw Exception("Failed to load people");
     }
