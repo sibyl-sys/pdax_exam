@@ -45,7 +45,7 @@ class _PersonListViewState extends State<PersonListView> {
       itemCount: listController.people.length + 1,
       itemBuilder: (BuildContext ctxt, int index) {
         if (index < listController.people.length) {
-          return PersonCard(person: listController.people[index], index: index);
+          return PersonCard(person: listController.people[index]);
         } else if (listController.isLoading) {
           return const Center(
               child: CircularProgressIndicator(color: Colors.green));

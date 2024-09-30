@@ -22,7 +22,7 @@ class Person {
         birthday = DateTime.parse(map["birthday"] as String),
         gender = map["gender"] as String,
         address = Address.fromMap(map["address"] as Map<String, Object?>),
-        imgURL = map["image"] as String,
+        imgURL = "https://i.pravatar.cc/100?random=${map["id"]}",
         website = map["website"] as String;
 }
 

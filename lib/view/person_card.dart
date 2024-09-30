@@ -3,8 +3,7 @@ import 'package:pdax_exam/model/person.dart';
 
 class PersonCard extends StatelessWidget {
   final Person person;
-  final int index;
-  const PersonCard({super.key, required this.person, required this.index});
+  const PersonCard({super.key, required this.person});
 
   @override
   Widget build(BuildContext context) {
@@ -14,8 +13,7 @@ class PersonCard extends StatelessWidget {
         Navigator.pushNamed(context, "/person", arguments: person);
       },
       child: Row(children: [
-        Image.network("https://i.pravatar.cc/100?random=${index.toString()}",
-            width: 100, height: 100),
+        Image.network(person.imgURL, width: 100, height: 100),
         SizedBox(width: 10),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
