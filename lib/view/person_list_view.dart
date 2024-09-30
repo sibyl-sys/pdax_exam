@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pdax_exam/controller/person_list_controller.dart';
 import 'package:pdax_exam/view/person_card.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 class PersonListView extends StatefulWidget {
   const PersonListView({super.key});
@@ -25,13 +26,17 @@ class _PersonListViewState extends State<PersonListView> {
   @override
   void initState() {
     super.initState();
-    _scrollController.addListener(_scrollListener);
+    if (!kIsWeb) {
+      _scrollController.addListener(_scrollListener);
+    }
   }
 
   @override
   void dispose() {
-    _scrollController.removeListener(_scrollListener);
-    _scrollController.dispose();
+    if (!kIsWeb) {
+      _scrollController.removeListener(_scrollListener);
+      _scrollController.dispose();
+    }
     super.dispose();
   }
 
@@ -51,6 +56,13 @@ class _PersonListViewState extends State<PersonListView> {
               child: CircularProgressIndicator(color: Colors.green));
         } else if (listController.refreshCount > listController.refreshLimit) {
           return const Center(child: Text("No more data."));
+        } else if (listController.refreshCount <= listController.refreshCount &&
+            kIsWeb) {
+          return TextButton(
+              child: const Text("Load More"),
+              onPressed: () {
+                listController.fetchPeople(20);
+              });
         } else {
           return const SizedBox.shrink();
         }
