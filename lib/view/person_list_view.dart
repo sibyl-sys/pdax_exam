@@ -12,11 +12,12 @@ class PersonListView extends StatefulWidget {
 
 class _PersonListViewState extends State<PersonListView> {
   late PersonListController listController;
-  ScrollController _scrollController = ScrollController();
+  final ScrollController _scrollController = ScrollController();
 
   void _scrollListener() {
     if (_scrollController.position.pixels ==
         _scrollController.position.maxScrollExtent) {
+      print("Refresh");
       listController.fetchPeople(20);
     }
   }
@@ -39,6 +40,7 @@ class _PersonListViewState extends State<PersonListView> {
     listController = context.watch<PersonListController>();
     return ListView.builder(
       shrinkWrap: true,
+      controller: _scrollController,
       scrollDirection: Axis.vertical,
       itemCount: listController.people.length,
       itemBuilder: (BuildContext ctxt, int index) {

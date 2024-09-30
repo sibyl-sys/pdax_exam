@@ -13,7 +13,7 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    context.read<PersonListController>().fetchPeople(10);
+    context.read<PersonListController>().initializePeople();
     return SafeArea(
       child: MaterialApp(
         home: Scaffold(
